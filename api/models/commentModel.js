@@ -1,15 +1,15 @@
-const fs = require('fs');
-const FILE_PATH = `${__dirname}/../data/data.json`;
+const { MongoClient } = require("mongodb");
+const uri = "mongodb://localhost:27020";
+const client = new MongoClient(uri);
 
-const getAll = () => {
-    const fileText = fs.readFileSync(FILE_PATH);
-    return JSON.parse(fileText);
+const getAll = async () => {
+    await commentsCollection().find();
 }
 
-const insert = (comment) => {
-    const allComments = getAll();
-    allComments.push(comment);
-    fs.writeFileSync(FILE_PATH, JSON.stringify(allComments));
+const insert = async (comment) => {
+    await commentsCollection().insertOne(comment);
 }
+
+const commentsCollection = () => client.db("noSqlInjection").collection("comments");
 
 module.exports = { getAll, insert };
