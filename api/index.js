@@ -10,18 +10,17 @@ app.use(express.urlencoded({ extended: true }))
 
 const port = 3000;
 
-app.get('/api/comment', (req, res) => {
-    const comments = commentService.getAll();
-    return res.status(200).json({ comments })
+app.get('/api/comment', async (req, res) => {
+    var comments = await commentService.getAll();
+    return res.status(200).json({ comments });
 })
 
-app.post('/api/comment', (req, res) => {
+app.post('/api/comment', async (req, res) => {
     const comment = req.body;
-    commentService.insertComment(comment);
+    await commentService.insertComment(comment);
     return res.status(201).json(comment);
 })
 
 app.listen(port, () => {
     console.log(`Api rodando - http://localhost:${port}`)
-})
-
+});

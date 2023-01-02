@@ -1,9 +1,9 @@
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://localhost:27020";
+const uri = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=noSqlInjection";
 const client = new MongoClient(uri);
 
-const getAll = async () => {
-    await commentsCollection().find();
+const getAll = () => {
+    return commentsCollection().find().toArray();;
 }
 
 const insert = async (comment) => {
@@ -11,5 +11,4 @@ const insert = async (comment) => {
 }
 
 const commentsCollection = () => client.db("noSqlInjection").collection("comments");
-
 module.exports = { getAll, insert };

@@ -4,8 +4,8 @@ const getAll = () => {
     return commentModel.getAll();
 };
 
-const insertComment = (comment) => {
-    commentModel.insert(comment);
+const insertComment = async (comment) => {
+    await commentModel.insert(comment);
 };
 
 
