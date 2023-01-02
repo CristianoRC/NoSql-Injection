@@ -6,9 +6,15 @@ const getAll = () => {
     return commentsCollection().find().toArray();;
 }
 
+const get = (name) => {
+    return commentsCollection()
+        .find({ name })
+        .toArray();
+}
+
 const insert = async (comment) => {
     await commentsCollection().insertOne(comment);
 }
 
 const commentsCollection = () => client.db("noSqlInjection").collection("comments");
-module.exports = { getAll, insert };
+module.exports = { getAll, get, insert };

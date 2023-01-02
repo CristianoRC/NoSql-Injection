@@ -1,7 +1,7 @@
 const commentModel = require('../models/commentModel')
 
-const getAll = () => {
-    return commentModel.getAll();
+const get = (name) => {
+    return name ? commentModel.get(name) : commentModel.getAll();
 };
 
 const insertComment = async (comment) => {
@@ -9,4 +9,4 @@ const insertComment = async (comment) => {
 };
 
 
-module.exports = { getAll, insertComment };
+module.exports = { get, insertComment };
