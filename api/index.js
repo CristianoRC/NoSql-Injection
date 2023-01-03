@@ -13,7 +13,8 @@ const port = 3000;
 
 app.get('/api/comment', async (req, res) => {
     const name = req.query.name;
-    var comments = await commentService.get(name);
+    const useCache =  req.query.useCache;
+    var comments = await commentService.get(name, useCache);
     return res.status(200).json({ comments });
 })
 
