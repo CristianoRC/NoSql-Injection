@@ -12,9 +12,8 @@ app.use(express.urlencoded({ extended: true }))
 const port = 3000;
 
 app.get('/api/comment', async (req, res) => {
-    //const name = req.query.name;
-    const { name } = req.query;
-    var comments = await commentService.get(JSON.parse(name));
+    const name = req.query.name;
+    var comments = await commentService.get(name);
     return res.status(200).json({ comments });
 })
 
